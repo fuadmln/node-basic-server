@@ -11,10 +11,27 @@ const server = http.createServer((req, res) => {
       res.write(html);
       res.end();
     });
+  } else if (req.url == '/about'){
+    fs.readFile('./pages/about.html', (error, html) => {
+      if(error) throw error;
+      res.writeHeader(200, {"Content-Type": "text/html"});
+      res.write(html);
+      res.end();
+    });
+  } else if (req.url == '/contact'){
+    fs.readFile('./pages/contact.html', (error, html) => {
+      if(error) throw error;
+      res.writeHeader(200, {"Content-Type": "text/html"});
+      res.write(html);
+      res.end();
+    });
   } else {
-    res.writeHeader(200, {"Content-Type": "text/html"});
-    res.write('NOT FOUND');
-    res.end();
+    fs.readFile('./pages/404.html', (error, html) => {
+      if(error) throw error;
+      res.writeHeader(200, {"Content-Type": "text/html"});
+      res.write(html);
+      res.end();
+    });
   }
 });
 
